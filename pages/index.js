@@ -13,10 +13,10 @@ export default function Home({ articles }) {
     };
     getAll();
 
-    const getArticle = async () => {
+    const getArticleDetails = async () => {
       await getArticle();
     };
-    getArticle();
+    getArticleDetails();
   });
   const handleRegisterUser = () => {
     const user = register({
