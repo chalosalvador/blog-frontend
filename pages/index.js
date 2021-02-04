@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { getAllArticles } from "@/lib/db";
+import { getAllArticles, getArticle } from "@/lib/db";
 import { useAuth } from "@/lib/auth";
 import { useEffect } from "react";
 
