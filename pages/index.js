@@ -8,10 +8,15 @@ export default function Home({ articles }) {
   const { register, login } = useAuth();
 
   useEffect(() => {
-    const get = async () => {
+    const getAll = async () => {
       await getAllArticles();
     };
-    get();
+    getAll();
+
+    const getArticle = async () => {
+      await getArticle();
+    };
+    getArticle();
   });
   const handleRegisterUser = () => {
     const user = register({
