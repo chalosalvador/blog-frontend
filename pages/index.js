@@ -5,7 +5,7 @@ import { useAuth } from "@/lib/auth";
 import { useEffect } from "react";
 
 export default function Home({ articles }) {
-  const { register, login } = useAuth();
+  const { register, login, logout } = useAuth();
 
   useEffect(() => {
     const getAll = async () => {
@@ -37,6 +37,10 @@ export default function Home({ articles }) {
     });
   };
 
+  const handleLogout = () => {
+    const user = logout();
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -51,6 +55,7 @@ export default function Home({ articles }) {
 
         <button onClick={handleRegisterUser}>Registrar usuario</button>
         <button onClick={handleLogin}>Iniciar sesión</button>
+        <button onClick={handleLogout}>Cerrar sesión</button>
 
         <ul>
           {articles.map((article) => (
