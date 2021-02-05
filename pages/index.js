@@ -1,60 +1,44 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import { getAllArticles, getArticle } from "@/lib/db";
-import { useAuth } from "@/lib/auth";
 import { useEffect } from "react";
+import Head from "next/head";
+import Cookies from "universal-cookie";
 
-export default function Home({ articles }) {
-  const { register, login, logout } = useAuth();
+import { useAuth } from "@/lib/auth";
+import withAuth from "@/hocs/withAuth";
+import { getAllArticles } from "@/lib/db";
 
-  useEffect(() => {
-    const getAll = async () => {
-      await getAllArticles();
-    };
-    getAll();
+import styles from "../styles/Home.module.css";
+import Link from "next/link";
 
-    const getArticleDetails = async () => {
-      await getArticle();
-    };
-    getArticleDetails();
-  });
-  const handleRegisterUser = () => {
-    const user = register({
-      email: "chalosalvador@gmail.com",
-      name: "Chalo",
-      editorial: "TEST",
-      short_bio: "YEAHAAA",
-      role: "ROLE_USER",
-      password: "123123",
-      password_confirmation: "123123",
-    });
-  };
-
-  const handleLogin = () => {
-    const user = login({
-      email: "chalosalvador@gmail.com",
-      password: "123123",
-    });
-  };
+function Home({ articles }) {
+  const { logout, user } = useAuth();
 
   const handleLogout = () => {
-    const user = logout();
+    logout();
   };
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Home</title>
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <Link href="/">
+        <a>Home</a>
+      </Link>
+      <Link href="/about-us">
+        <a>About Us</a>
+      </Link>
+      <Link href="/login">
+        <a>Login</a>
+      </Link>
 
-        <button onClick={handleRegisterUser}>Registrar usuario</button>
-        <button onClick={handleLogin}>Iniciar sesión</button>
+      <main className={styles.main}>
+        {user ? <h1>Hola {user.name}</h1> : null}
+
+        <h2 className={styles.title}>
+          Welcome to <a href="https://nextjs.org">Next.js!</a>
+        </h2>
+
         <button onClick={handleLogout}>Cerrar sesión</button>
 
         <ul>
@@ -78,7 +62,7 @@ export default function Home({ articles }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const articles = await getAllArticles();
 
   if (!articles) {
@@ -93,3 +77,5 @@ export async function getStaticProps(context) {
     }, // will be passed to the page component as props
   };
 }
+
+export default withAuth(Home);
