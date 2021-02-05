@@ -43,7 +43,11 @@ function Home({ articles }) {
 
         <ul>
           {articles.map((article) => (
-            <li key={article.id}>{article.title}</li>
+            <li key={article.id}>
+              <Link href={`/articles/${article.id}`}>
+                <a>{article.title}</a>
+              </Link>
+            </li>
           ))}
         </ul>
       </main>
@@ -63,8 +67,8 @@ function Home({ articles }) {
 }
 
 export async function getStaticProps() {
-  const articles = await getAllArticles();
-
+  const res = await getAllArticles();
+  const articles = res.data;
   if (!articles) {
     return {
       notFound: true,
