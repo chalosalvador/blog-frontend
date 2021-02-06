@@ -38,7 +38,7 @@ const Articles = ({ articles }) => {
   const classes = useStyles();
   return (
     <Grid container spacing={2}>
-      {articles.map((article) => (
+      {articles.map((article, index) => (
         <Grid item xs={12} sm={6} md={4} key={article.id}>
           <Card>
             <CardActionArea>
@@ -46,7 +46,10 @@ const Articles = ({ articles }) => {
                 component="img"
                 alt={article.title}
                 height="140"
-                image={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${article.image}`}
+                // faker image no está funcionando así que pongo otro source para que se presenten las imagenes
+                // image={article.image}
+                // image={`https://source.unsplash.com/random/400x200?sig=${index}`}
+                image={`https://picsum.photos/200/300?sig=${index}`}
                 title={article.title}
               />
               <CardContent>
