@@ -46,7 +46,7 @@ const Articles = ({ articles }) => {
                 component="img"
                 alt={article.title}
                 height="140"
-                image={`http://localhost:8000/storage/${article.image}`}
+                image={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${article.image}`}
                 title={article.title}
               />
               <CardContent>
