@@ -3,8 +3,8 @@
  */
 import { useRouter } from "next/router";
 
-import withAuth from "@/hocs/withAuth";
-import { getAllArticles, getArticle } from "@/lib/db";
+import withAuth from "../../hocs/withAuth";
+import { getAllArticles, getArticle } from "../../lib/db";
 
 const ArticleDetails = ({ article }) => {
   const router = useRouter();

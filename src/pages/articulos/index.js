@@ -2,7 +2,7 @@
  * Created by chalosalvador on 5/2/21
  */
 
-import { getAllArticles } from "@/lib/db";
+import { getAllArticles } from "../../lib/db";
 import Link from "next/link";
 import {
   Button,
@@ -47,7 +47,7 @@ const Articles = ({ articles }) => {
                 alt={article.title}
                 height="140"
                 // faker image no está funcionando así que pongo otro source para que se presenten las imagenes
-                // image={article.image}
+                // image={`${process.env.NEXT_PUBLIC_STORAGE_URL}/${article.image}`}
                 // image={`https://source.unsplash.com/random/400x200?sig=${index}`}
                 image={`https://picsum.photos/200/300?sig=${index}`}
                 title={article.title}

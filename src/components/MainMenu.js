@@ -32,20 +32,21 @@ import {
 import Slide from "@material-ui/core/Slide";
 import List from "@material-ui/core/List";
 import clsx from "clsx";
+import Routes from "../constants/routes";
 
 const drawerWidth = 240;
 const mainMenuItems = [
   {
     text: "Inicio",
-    to: "/",
+    to: Routes.HOME,
   },
   {
     text: "Artículos",
-    to: "/articles",
+    to: Routes.ARTICLES,
   },
   {
     text: "Sobre nosotros",
-    to: "about-us",
+    to: Routes.ABOUT,
   },
 ];
 const useStyles = makeStyles((theme) => ({

@@ -1,15 +1,13 @@
-import { useEffect } from "react";
 import Head from "next/head";
-import Cookies from "universal-cookie";
-
-import { useAuth } from "@/lib/auth";
-import withAuth from "@/hocs/withAuth";
-import { getAllArticles } from "@/lib/db";
-
-import styles from "../styles/Home.module.css";
 import Link from "next/link";
 
-function Home({ articles }) {
+import { useAuth } from "../lib/auth";
+import withAuth from "../hocs/withAuth";
+import { getAllArticles } from "../lib/db";
+
+import styles from "../styles/Home.module.css";
+
+export default withAuth(function HomePage({ articles }) {
   const { logout, user } = useAuth();
 
   const handleLogout = () => {
@@ -21,16 +19,6 @@ function Home({ articles }) {
       <Head>
         <title>Home</title>
       </Head>
-
-      <Link href="/">
-        <a>Home</a>
-      </Link>
-      <Link href="/about-us">
-        <a>About Us</a>
-      </Link>
-      <Link href="/login">
-        <a>Login</a>
-      </Link>
 
       <main className={styles.main}>
         {user ? <h1>Hola {user.name}</h1> : null}
@@ -64,7 +52,7 @@ function Home({ articles }) {
       </footer>
     </div>
   );
-}
+});
 
 export async function getStaticProps() {
   const res = await getAllArticles();
@@ -81,5 +69,3 @@ export async function getStaticProps() {
     }, // will be passed to the page component as props
   };
 }
-
-export default withAuth(Home);

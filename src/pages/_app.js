@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -6,13 +6,15 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Head from "next/head";
 import NProgress from "nprogress";
 import Router from "next/router";
+import { SnackbarProvider } from "notistack";
 
-import { AuthProvider } from "@/lib/auth";
-import MainMenu from "@/components/MainMenu";
+import { AuthProvider } from "../lib/auth";
+import MainMenu from "../components/MainMenu";
 import theme from "../styles/theme";
 
 import "../styles/globals.css";
 
+// Show a loading state
 Router.events.on("routeChangeStart", (url) => {
   console.log(`Loading: ${url}`);
   NProgress.start();
@@ -20,9 +22,9 @@ Router.events.on("routeChangeStart", (url) => {
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
-function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }) {
   useEffect(() => {
-    // Remove the server-side injected CSS.
+    // Remove the server-side injected CSS (Material UI fix).
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
@@ -38,23 +40,23 @@ function App({ Component, pageProps }) {
         />
         <link rel="stylesheet" type="text/css" href="/nprogress.css" />
       </Head>
-      <AuthProvider>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
+      <SnackbarProvider maxSnack={3}>
+        <AuthProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
 
-          <MainMenu />
+            <MainMenu />
 
-          <Container maxWidth="lg">
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Component {...pageProps} />
+            <Container maxWidth="lg">
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <Component {...pageProps} />
+                </Grid>
               </Grid>
-            </Grid>
-          </Container>
-        </ThemeProvider>
-      </AuthProvider>
+            </Container>
+          </ThemeProvider>
+        </AuthProvider>
+      </SnackbarProvider>
     </>
   );
 }
-
-export default App;

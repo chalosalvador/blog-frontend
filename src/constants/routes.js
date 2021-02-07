@@ -3,20 +3,17 @@
  */
 
 const publicRoutes = {
-  LOGIN: "/login",
+  LOGIN: "/iniciar-sesion",
   REGISTER: "/registro",
   ARTICLES: "/articulos",
   USERS: "/usuarios",
   USERS_ID: `/usuario/:id`,
-  HOME: "/",
-  ABOUT: "/acerca-de",
-  ANTD: "/antd",
+  ABOUT: "/sobre-nosotros",
 };
 
 const privateRoutes = {
-  LOGOUT: "/logout",
-  PRIVATE: "/privada",
-  ARTICLE_ID: "/articulo/:id",
+  HOME: "/",
+  // ARTICLE_ID: "/articulo/:id",
 };
 
 const Routes = {

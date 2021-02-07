@@ -28,6 +28,8 @@ class MyDocument extends Document {
   }
 }
 
+// This is a fix for Material UI SSR styles
+
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with server-side generation (SSG).
 MyDocument.getInitialProps = async (ctx) => {
