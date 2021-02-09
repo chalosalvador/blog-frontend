@@ -2,8 +2,6 @@
  * Created by chalosalvador on 5/2/21
  */
 import { useRouter } from "next/router";
-
-import withAuth from "../../hocs/withAuth";
 import { getAllArticles, getArticle } from "../../lib/db";
 
 const ArticleDetails = ({ article }) => {

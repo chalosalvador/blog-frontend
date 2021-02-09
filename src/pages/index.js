@@ -8,26 +8,14 @@ import { getAllArticles } from "../lib/db";
 import styles from "../styles/Home.module.css";
 
 export default withAuth(function HomePage({ articles }) {
-  const { logout, user } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-  };
-
   return (
     <div className={styles.container}>
       <Head>
-        <title>Home</title>
+        <title>Inicio</title>
       </Head>
 
       <main className={styles.main}>
-        {user ? <h1>Hola {user.name}</h1> : null}
-
-        <h2 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h2>
-
-        <button onClick={handleLogout}>Cerrar sesión</button>
+        <h2 className={styles.title}>Welcome to Next.js!</h2>
 
         <ul>
           {articles.map((article) => (
@@ -47,7 +35,11 @@ export default withAuth(function HomePage({ articles }) {
           rel="noopener noreferrer"
         >
           Powered by{" "}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+          <img
+            src="/logo-menta.png"
+            alt="Vercel Logo"
+            className={styles.logo}
+          />
         </a>
       </footer>
     </div>
