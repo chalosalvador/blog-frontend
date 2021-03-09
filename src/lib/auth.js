@@ -1,23 +1,23 @@
 /**
  * Created by chalosalvador on 2/2/21
  */
-import React, { useState, useEffect, useContext, createContext } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import api from "./api";
 import cookie from "js-cookie";
 
-const authContext = createContext(null);
+export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const auth = useAuthProvider();
-  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
+  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 }
 
 export const useAuth = () => {
-  const context = useContext(authContext);
+  const context = useContext(AuthContext);
   if (context === undefined) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
-  return useContext(authContext);
+  return context;
 };
 
 function useAuthProvider() {
@@ -149,22 +149,12 @@ function useAuthProvider() {
   }
 
   useEffect(() => {
-    console.log("RENDER AUTH");
+    console.log("RENDER AUTH", user);
     try {
       getAuthenticatedUser();
     } catch (error) {
       console.log("NO USER");
     }
-
-    // const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-    //   if (user) {
-    //     handleUser(user);
-    //   } else {
-    //     handleUser(false);
-    //   }
-    // });
-    //
-    // return () => unsubscribe();
   }, []);
 
   return {
