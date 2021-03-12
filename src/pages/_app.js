@@ -13,6 +13,7 @@ import MainMenu from "../components/MainMenu";
 import theme from "../styles/theme";
 
 import "../styles/globals.css";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 // Show a loading state
 Router.events.on("routeChangeStart", (url) => {
@@ -41,21 +42,23 @@ export default function App({ Component, pageProps }) {
         <link rel="stylesheet" type="text/css" href="/nprogress.css" />
       </Head>
       <SnackbarProvider maxSnack={3}>
-        <AuthProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
+        <ErrorBoundary>
+          <AuthProvider>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
 
-            <MainMenu />
+              <MainMenu />
 
-            <Container maxWidth="lg">
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <Component {...pageProps} />
+              <Container maxWidth="lg">
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Component {...pageProps} />
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Container>
-          </ThemeProvider>
-        </AuthProvider>
+              </Container>
+            </ThemeProvider>
+          </AuthProvider>
+        </ErrorBoundary>
       </SnackbarProvider>
     </>
   );
